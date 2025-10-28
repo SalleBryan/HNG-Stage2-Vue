@@ -1,58 +1,84 @@
 <template>
   <div>
-    <div class="container" style="padding-top: var(--space-xl); padding-bottom: var(--space-2xl)">
-      <div class="hero">
+    <div class="container" :style="{ paddingTop: 'var(--space-xl)', paddingBottom: 'var(--space-2xl)' }">
+      <div class="hero" :style="{ position: 'relative', overflow: 'hidden' }">
+        <!-- Added wavy SVG background that changes color based on theme -->
+        <svg
+          :style="{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            width: '100%',
+            height: 'auto',
+            zIndex: 0,
+            pointerEvents: 'none',
+            opacity: 0.3,
+          }"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0,0 C150,80 350,0 600,50 C850,100 1050,20 1200,80 L1200,120 L0,120 Z"
+            :fill="theme === 'light' ? '#d97706' : '#92400e'"
+          />
+        </svg>
+        <!-- </CHANGE> -->
         <div class="hero-content">
           <h1>Manage Tickets with Ease and Elegance</h1>
           <p class="text-pretty">
             A beautiful, intuitive ticket management system designed with warm autumn aesthetics. Track, organize, and
             resolve tickets efficiently while enjoying a delightful user experience.
           </p>
-          <div style="display: flex; gap: var(--space-md); flex-wrap: wrap">
-            <router-link to="/dashboard" class="btn" v-if="authStore.user">
-              Go to Dashboard
-            </router-link>
-            <router-link to="/tickets" class="btn secondary" v-if="authStore.user">
-              View Tickets
-            </router-link>
-            <router-link to="/auth/signup" class="btn" v-if="!authStore.user">
-              Get Started
-            </router-link>
-            <router-link to="/auth/login" class="btn secondary" v-if="!authStore.user">
-              Sign In
-            </router-link>
+          <div :style="{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }">
+            <template v-if="user">
+              <router-link to="/dashboard" class="btn">
+                Go to Dashboard
+              </router-link>
+              <router-link to="/tickets" class="btn secondary">
+                View Tickets
+              </router-link>
+            </template>
+            <template v-else>
+              <router-link to="/auth/signup" class="btn">
+                Get Started
+              </router-link>
+              <router-link to="/auth/login" class="btn secondary">
+                Sign In
+              </router-link>
+            </template>
           </div>
         </div>
-        <div style="flex: 0 0 auto; position: relative; z-index: 1">
+        <div :style="{ flex: '0 0 auto', position: 'relative', zIndex: 1 }">
           <img
             src="/autumn-leaves-ticket-management-illustration.jpg"
             alt="Ticket management illustration"
-            style="
-              width: 100%;
-              max-width: 400px;
-              height: auto;
-              border-radius: var(--radius-xl);
-              box-shadow: var(--shadow-xl);
-            "
+            :style="{
+              width: '100%',
+              maxWidth: '400px',
+              height: 'auto',
+              borderRadius: 'var(--radius-xl)',
+              boxShadow: 'var(--shadow-xl)',
+            }"
           />
         </div>
       </div>
 
-      <section style="margin-top: var(--space-2xl)">
-        <h2 style="text-align: center; margin-bottom: var(--space-xl)">Key Features</h2>
+      <section :style="{ marginTop: 'var(--space-2xl)' }">
+        <h2 :style="{ textAlign: 'center', marginBottom: 'var(--space-xl)' }">Key Features</h2>
         <div
-          style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-          "
+          :style="{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 'var(--space-lg)',
+          }"
         >
           <div class="card">
             <div
-              style="
-                margin-bottom: var(--space-md);
-                color: var(--accent-primary);
-              "
+              :style="{
+                marginBottom: 'var(--space-md)',
+                color: 'var(--accent-primary)',
+              }"
             >
               <Ticket :size="32" />
             </div>
@@ -62,10 +88,10 @@
 
           <div class="card">
             <div
-              style="
-                margin-bottom: var(--space-md);
-                color: var(--accent-primary);
-              "
+              :style="{
+                marginBottom: 'var(--space-md)',
+                color: 'var(--accent-primary)',
+              }"
             >
               <BarChart3 :size="32" />
             </div>
@@ -75,10 +101,10 @@
 
           <div class="card">
             <div
-              style="
-                margin-bottom: var(--space-md);
-                color: var(--accent-primary);
-              "
+              :style="{
+                marginBottom: 'var(--space-md)',
+                color: 'var(--accent-primary)',
+              }"
             >
               <Palette :size="32" />
             </div>
@@ -90,69 +116,63 @@
     </div>
 
     <footer
-      style="
-        background: var(--color-surface);
-        border-top: 1px solid var(--color-border);
-        margin-top: var(--space-2xl);
-        padding: var(--space-2xl) 0;
-      "
+      :style="{
+        background: 'var(--color-surface)',
+        borderTop: '1px solid var(--color-border)',
+        marginTop: 'var(--space-2xl)',
+        padding: 'var(--space-2xl) 0',
+      }"
     >
       <div class="container">
         <div
-          style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-xl);
-            margin-bottom: var(--space-xl);
-          "
+          :style="{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: 'var(--space-xl)',
+            marginBottom: 'var(--space-xl)',
+          }"
         >
           <div>
             <div
-              style="
-                display: flex;
-                align-items: center;
-                gap: var(--space-sm);
-                margin-bottom: var(--space-md);
-              "
+              :style="{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'var(--space-sm)',
+                marginBottom: 'var(--space-md)',
+              }"
             >
               <div class="logo">🍂</div>
-              <span style="font-family: var(--font-heading); font-weight: 700; font-size: 20px">TicketFlow</span>
+              <span :style="{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '20px' }">TicketFlow</span>
             </div>
-            <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm)">
+            <p :style="{ color: 'var(--color-text-secondary)', fontSize: 'var(--font-size-sm)' }">
               A beautiful ticket management system with autumn-inspired design.
             </p>
           </div>
 
           <div>
-            <h4 style="margin-bottom: var(--space-md); font-size: var(--font-size-md)">Quick Links</h4>
+            <h4 :style="{ marginBottom: 'var(--space-md)', fontSize: 'var(--font-size-md)' }">Quick Links</h4>
             <ul
-              style="
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-                gap: var(--space-sm);
-              "
+              :style="{
+                listStyle: 'none',
+                padding: 0,
+                margin: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--space-sm)',
+              }"
             >
               <li>
-                <router-link to="/" style="color: var(--color-text-secondary); font-size: var(--font-size-sm)">
+                <router-link to="/" :style="{ color: 'var(--color-text-secondary)', fontSize: 'var(--font-size-sm)' }">
                   Home
                 </router-link>
               </li>
               <li>
-                <router-link
-                  to="/auth/login"
-                  style="color: var(--color-text-secondary); font-size: var(--font-size-sm)"
-                >
+                <router-link to="/auth/login" :style="{ color: 'var(--color-text-secondary)', fontSize: 'var(--font-size-sm)' }">
                   Login
                 </router-link>
               </li>
               <li>
-                <router-link
-                  to="/auth/signup"
-                  style="color: var(--color-text-secondary); font-size: var(--font-size-sm)"
-                >
+                <router-link to="/auth/signup" :style="{ color: 'var(--color-text-secondary)', fontSize: 'var(--font-size-sm)' }">
                   Sign Up
                 </router-link>
               </li>
@@ -160,15 +180,33 @@
           </div>
 
           <div>
-            <h4 style="margin-bottom: var(--space-md); font-size: var(--font-size-md)">Connect</h4>
-            <div style="display: flex; gap: var(--space-md)">
-              <a href="https://github.com/sallebryan" target="_blank" aria-label="GitHub" style="color: var(--color-text-secondary)">
+            <h4 :style="{ marginBottom: 'var(--space-md)', fontSize: 'var(--font-size-md)' }">Connect</h4>
+            <div :style="{ display: 'flex', gap: 'var(--space-md)' }">
+              <a
+                href="https://github.com/sallebryan"
+                target="_blank"
+                aria-label="GitHub"
+                :style="{ color: 'var(--color-text-secondary)' }"
+                rel="noreferrer"
+              >
                 <Github :size="20" />
               </a>
-              <a href="https://x.com/bryanja72423970" target="_blank" aria-label="X" style="color: var(--color-text-secondary)">
+              <a
+                href="https://x.com/bryanja72423970"
+                target="_blank"
+                aria-label="X"
+                :style="{ color: 'var(--color-text-secondary)' }"
+                rel="noreferrer"
+              >
                 <Twitter :size="20" />
               </a>
-              <a href="https://www.linkedin.com/in/salle-yimnai-bryan-56619b322" target="_blank" aria-label="LinkedIn" style="color: var(--color-text-secondary)">
+              <a
+                href="https://www.linkedin.com/in/salle-yimnai-bryan-56619b322"
+                target="_blank"
+                aria-label="Email"
+                :style="{ color: 'var(--color-text-secondary)' }"
+                rel="noreferrer"
+              >
                 <Linkedin :size="20" />
               </a>
             </div>
@@ -176,13 +214,13 @@
         </div>
 
         <div
-          style="
-            border-top: 1px solid var(--color-border);
-            padding-top: var(--space-lg);
-            text-align: center;
-          "
+          :style="{
+            borderTop: '1px solid var(--color-border)',
+            paddingTop: 'var(--space-lg)',
+            textAlign: 'center',
+          }"
         >
-          <p style="color: var(--color-muted); font-size: var(--font-size-sm); margin: 0">
+          <p :style="{ color: 'var(--color-muted)', fontSize: 'var(--font-size-sm)', margin: 0 }">
             © {{ new Date().getFullYear() }} Salle Bryan. All rights reserved.
           </p>
         </div>
@@ -191,9 +229,39 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
 import { Ticket, BarChart3, Palette, Github, Twitter, Linkedin } from 'lucide-vue-next'
-import { useAuthStore } from '../composables/useAuth'
 
-const authStore = useAuthStore()
+const theme = ref('light')
+const user = ref(null) // Replace with your auth composable: const { user } = useAuth()
+
+let observer = null
+
+onMounted(() => {
+  const savedTheme = localStorage.getItem('theme')
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light')
+  theme.value = initialTheme
+
+  // Listen for theme changes
+  observer = new MutationObserver(() => {
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    if (currentTheme) {
+      theme.value = currentTheme
+    }
+  })
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  })
+})
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect()
+  }
+})
+// </CHANGE>
 </script>
