@@ -2,7 +2,7 @@
   <div>
     <div class="container" :style="{ paddingTop: 'var(--space-xl)', paddingBottom: 'var(--space-2xl)' }">
       <div class="hero" :style="{ position: 'relative', overflow: 'hidden' }">
-        <!-- Added wavy SVG background that changes color based on theme -->
+        
         <svg
           :style="{
             position: 'absolute',
