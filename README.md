@@ -38,7 +38,7 @@ A modern, accessible ticket management web application with a beautiful autumn t
 
 ### Quick Start
 
-\`\`\`bash
+```bash
 # Install dependencies
 npm install
 
@@ -50,7 +50,7 @@ npm run build
 
 # Preview production build
 npm run preview
-\`\`\`
+```
 
 The app will be available at `http://localhost:5173`
 
@@ -123,14 +123,14 @@ Located in `/src/assets/autumn/`:
 
 Use these credentials to test the authentication flow:
 
-\`\`\`
+```
 Email: test@ticketapp.local
 Password: Password123!
-\`\`\`
+```
 
 ## 📁 Project Structure
 
-\`\`\`
+```
 src/
 ├── assets/
 │   └── autumn/          # Seasonal SVG and texture assets
@@ -159,12 +159,12 @@ src/
 │   └── App.css          # Component styles
 ├── App.vue              # Root component
 └── main.ts              # Application entry point
-\`\`\`
+```
 
 ## 🎯 Data Model
 
 ### Ticket Schema
-\`\`\`typescript
+```typescript
 interface Ticket {
   id: string;
   title: string;              // Required, 3-200 chars
@@ -174,7 +174,7 @@ interface Ticket {
   createdAt: string;          // ISO date
   updatedAt: string;          // ISO date
 }
-\`\`\`
+```
 
 ### Validation Rules
 - **Title**: Required, 3-200 characters
@@ -239,29 +239,28 @@ This is a demonstration project. For production use, consider:
 - [Vue Router](https://router.vuejs.org)
 - [Tailwind CSS](https://tailwindcss.com)
 - [Lucide Vue Next](https://lucide.dev/guide/packages/lucide-vue-next)
-- [WCAG Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 
 ## 🔧 Development Tips
 
 ### Using Composables
-\`\`\`typescript
+```typescript
 // In any component
 import { useAuth } from '@/composables/useAuth'
 
 const { user, login, logout } = useAuth()
-\`\`\`
+```
 
 ### Theme Management
-\`\`\`typescript
+```typescript
 // Access theme anywhere
 import { useTheme } from '@/composables/useTheme'
 
 const { theme, toggleTheme } = useTheme()
-\`\`\`
+```
 
 ### Router Guards
 Protected routes automatically check authentication:
-\`\`\`typescript
+```typescript
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   const session = localStorage.getItem('ticketapp_session')
@@ -272,6 +271,6 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-\`\`\`
+```
 
 ---
